@@ -1,4 +1,4 @@
-const { operate, toNumber } = require('../calculator');
+const { operate, toNumber, modulo, power, squareRoot } = require('../calculator');
 
 describe('toNumber', () => {
   test('parses numeric strings', () => {
@@ -66,5 +66,52 @@ describe('operate - division', () => {
 describe('operate - errors and unknowns', () => {
   test('unknown operator throws', () => {
     expect(() => operate('pow', [2, 3])).toThrow('Unknown operator: pow');
+  });
+});
+
+// New operation tests: modulo, power, squareRoot
+describe('modulo', () => {
+  test('5 % 2 = 1', () => {
+    expect(modulo(5, 2)).toBe(1);
+  });
+
+  test('floating point modulo', () => {
+    expect(modulo(5.5, 2)).toBeCloseTo(1.5);
+  });
+
+  test('modulo by zero throws', () => {
+    expect(() => modulo(5, 0)).toThrow('Division by zero');
+  });
+});
+
+describe('power', () => {
+  test('2^3 = 8', () => {
+    expect(power(2, 3)).toBe(8);
+  });
+
+  test('negative exponent', () => {
+    expect(power(2, -1)).toBeCloseTo(0.5);
+  });
+
+  test('fractional exponent', () => {
+    expect(power(4, 0.5)).toBeCloseTo(2);
+  });
+});
+
+describe('squareRoot', () => {
+  test('sqrt(16) = 4', () => {
+    expect(squareRoot(16)).toBe(4);
+  });
+
+  test('sqrt of non-perfect square', () => {
+    expect(squareRoot(2)).toBeCloseTo(Math.sqrt(2));
+  });
+
+  test('sqrt of negative number throws', () => {
+    expect(() => squareRoot(-1)).toThrow('Cannot compute square root of negative number');
+  });
+
+  test('non-finite input throws', () => {
+    expect(() => squareRoot(NaN)).toThrow('Argument must be a finite number');
   });
 });

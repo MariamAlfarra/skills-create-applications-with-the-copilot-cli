@@ -102,5 +102,33 @@ if (require.main === module) {
   main();
 }
 
+// Exported utility functions
+function modulo(a, b) {
+  if (!Number.isFinite(a) || !Number.isFinite(b)) {
+    throw new TypeError('Arguments must be finite numbers');
+  }
+  if (b === 0) {
+    throw new Error('Division by zero');
+  }
+  return a % b;
+}
+
+function power(base, exponent) {
+  if (!Number.isFinite(base) || !Number.isFinite(exponent)) {
+    throw new TypeError('Arguments must be finite numbers');
+  }
+  return Math.pow(base, exponent);
+}
+
+function squareRoot(n) {
+  if (!Number.isFinite(n)) {
+    throw new TypeError('Argument must be a finite number');
+  }
+  if (n < 0) {
+    throw new Error('Cannot compute square root of negative number');
+  }
+  return Math.sqrt(n);
+}
+
 // Export functions for unit testing
-module.exports = { operate, toNumber };
+module.exports = { operate, toNumber, modulo, power, squareRoot };

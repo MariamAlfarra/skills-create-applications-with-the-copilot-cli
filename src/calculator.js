@@ -29,6 +29,7 @@ function printUsageAndExit() {
 }
 
 function toNumber(str) {
+  if (typeof str !== 'string' || str.trim() === '') return null;
   const n = Number(str);
   return Number.isFinite(n) ? n : null;
 }
@@ -100,3 +101,6 @@ function main() {
 if (require.main === module) {
   main();
 }
+
+// Export functions for unit testing
+module.exports = { operate, toNumber };
